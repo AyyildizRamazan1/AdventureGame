@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class Game {
 	Player player;
 	Location location;
+	Scanner scan = new Scanner(System.in);
 
 	public void login() {
 		Scanner scan = new Scanner(System.in);
@@ -13,21 +14,38 @@ public class Game {
 		String playerName = scan.nextLine();
 		player = new Player(playerName);
 		player.selectCha();
+		start();
 	}
 
-	public Player getPlayer() {
-		return player;
-	}
+	public void start() {
+		while (true) {
+			System.out.println();
+			System.out.println("=======================");
+			System.out.println();
+			System.out.println("Choose a place to take action");
+			System.out.println("1. Safe House --> Yours is a safe place, there are no enemies !");
+			System.out.println("2. Cave --> You may encounter zombies!");
+			System.out.println("3. Forest --> You may come across a vampire");
+			System.out.println("4. River --> You may encounter a bear");
+			System.out.println("5. Shopping centre --> You can get weapons and armor");
+			System.out.print("where you want to go: ");
+			int selLoc = scan.nextInt();
+			while (selLoc < 0 || selLoc > 5) {
+				System.out.print("Please select a valid location: ");
+				selLoc = scan.nextInt();
+			}
+			switch (selLoc) {
+			case 1:
+				location = new SafeHouse(player);
+				break;
+			default:
+				location = new SafeHouse(player);
+			}
 
-	public void setPlayer(Player player) {
-		this.player = player;
-	}
-
-	public Location getLocation() {
-		return location;
-	}
-
-	public void setLocation(Location location) {
-		this.location = location;
+			if (!location.getLocation()) {
+				System.out.println("The game is finished! ");
+				break;
+			}
+		}
 	}
 }
