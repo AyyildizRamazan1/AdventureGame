@@ -48,6 +48,10 @@ public class Player {
 		return chaID;
 	}
 
+	public int getTotalDamage() {
+		return this.getDamage() + this.getInv().getDamage();
+	}
+
 	public void initPlayer(String cName, int dmg, int hlthy, int mny) {
 		setcName(cName);
 		setDamage(dmg);

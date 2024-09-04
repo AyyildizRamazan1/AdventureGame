@@ -21,7 +21,8 @@ public class ToolStore extends NormalLoc {
 			break;
 		}
 		case 2: {
-
+			selItemID = armorMenu();
+			buyArmor(selItemID);
 			break;
 		}
 		default:
@@ -29,6 +30,56 @@ public class ToolStore extends NormalLoc {
 		}
 
 		return true;
+	}
+
+	public int armorMenu() {
+		System.out.println("1. Lightweight\t <Money: 15 - Avoid: 1>");
+		System.out.println("2. Middle     \t <Money: 25 - Avoid: 3>");
+		System.out.println("3. Heavy      \t <Money: 40 - Avoid: 5>");
+		System.out.println("4. Exit");
+		System.out.print("Choose Armor: ");
+		int selArmorID = scan.nextInt();
+		return selArmorID;
+	}
+
+	public void buyArmor(int itemID) {
+		int avoid = 0, price = 0;
+		String aName = null;
+		switch (itemID) {
+		case 1:
+			avoid = 1;
+			aName = "Lightweight";
+			price = 15;
+			break;
+		case 2:
+			avoid = 3;
+			aName = "Middle";
+			price = 25;
+			break;
+		case 3:
+			avoid = 5;
+			aName = "Heavy";
+			price = 40;
+			break;
+		case 4:
+			System.out.println("Logging out");
+			break;
+		default:
+			System.out.println("Invalid transaction");
+			break;
+		}
+		if (price > 0) {
+			if (player.getMoney() >= price) {
+				player.getInv().setArmor(avoid);
+				player.getInv().setaName(aName);
+				player.setMoney(player.getMoney() - price);
+				System.out.println("You bought the " + aName + " ,Damage Blocked: " + player.getInv().getArmor());
+				System.out.println("Remaining money: " + player.getMoney());
+			} else {
+				System.out.println("Insufficient money");
+			}
+		}
+
 	}
 
 	public int weaponMenu() {
@@ -60,19 +111,25 @@ public class ToolStore extends NormalLoc {
 			wName = "Rifle";
 			price = 45;
 			break;
+		case 4:
+			System.out.println("Logging out");
+			break;
 		default:
 			System.out.println("Invalid transaction");
 			break;
 		}
-		if (player.getMoney() > price) {
-			player.getInv().setDamage(damage);
-			player.getInv().setwName(wName);
-			player.setMoney(player.getMoney() - price);
-			System.out.println("You bought the " + wName + " ,Previous Damage: " + player.getDamage() + " ,New Damage: "
-					+ (player.getDamage() + player.getInv().getDamage()));
-			System.out.println("Remaining money: " + player.getMoney());
-		} else {
-			System.out.println("Insufficient money");
+		if (price > 0) {
+			if (player.getMoney() >= price) {
+				player.getInv().setDamage(damage);
+				player.getInv().setwName(wName);
+				player.setMoney(player.getMoney() - price);
+				System.out.println(
+						"You bought the " + wName + " ,Previous Damage: " + player.getDamage() + " ,New Damage: "
+								+ (player.getDamage() + player.getInv().getDamage() + player.getTotalDamage()));
+				System.out.println("Remaining money: " + player.getMoney());
+			} else {
+				System.out.println("Insufficient money");
+			}
 		}
 
 	}
