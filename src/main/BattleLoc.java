@@ -1,7 +1,7 @@
 package main;
 
 public abstract class BattleLoc extends Location {
-	Obstacle obstacle;
+	protected Obstacle obstacle;
 
 	BattleLoc(Player player, String name, Obstacle obstacle) {
 		super(player);
@@ -10,7 +10,7 @@ public abstract class BattleLoc extends Location {
 	}
 
 	public boolean getLocation() {
-
+		int obsCount = obstacle.count();
 		return true;
 	}
 
