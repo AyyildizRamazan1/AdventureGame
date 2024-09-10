@@ -28,7 +28,8 @@ public class Player {
 			initPlayer("Samurai", 5, 21, 15);
 			break;
 		}
-		System.out.println("Character: " + getcName() + ", Damage: " + getDamage() + ", Healthy: " + getHealthy()
+		System.out.println("Character Created!");
+		System.out.println("Character Name: " + getcName() + ", Damage: " + getDamage() + ", Healthy: " + getHealthy()
 				+ ", Money: " + getMoney());
 	}
 
