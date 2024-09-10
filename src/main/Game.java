@@ -46,13 +46,19 @@ public class Game {
 				break;
 			case 4:
 				location = new River(player);
+				break;
 			case 5:
 				location = new ToolStore(player);
 				break;
 			default:
 				location = new SafeHouse(player);
 			}
-
+			if (location.getClass().getName().equals("SafeHouse")) {
+				if (player.getInv().isFirewood() && player.getInv().isFood() && player.getInv().isWater()) {
+					System.out.println("Congratulations You Won The Game!");
+					break;
+				}
+			}
 			if (!location.getLocation()) {
 				System.out.println("The game is finished! ");
 				break;

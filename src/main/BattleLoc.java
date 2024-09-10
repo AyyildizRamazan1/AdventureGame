@@ -61,7 +61,7 @@ public abstract class BattleLoc extends Location {
 						afterHit();
 					}
 				} else {
-					break;
+					return false;
 				}
 			}
 			if (obstacle.getHealth() < player.getHealthy()) {
